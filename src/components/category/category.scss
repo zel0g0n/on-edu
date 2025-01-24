@@ -1,0 +1,10 @@
+.category {
+  max-width: 1170px;
+  margin: 0 auto 100px auto;
+  & .title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #0d2e69;
+    margin: 20px 0;
+  }
+}

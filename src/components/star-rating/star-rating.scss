@@ -1,0 +1,14 @@
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  .star {
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 20px;
+  }
+  .rate {
+    font-size: 16px;
+    color: #ffc107;
+  }
+}

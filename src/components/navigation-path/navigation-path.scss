@@ -1,0 +1,16 @@
+.navigation {
+  max-width: 1170px;
+  margin: 20px auto;
+  display: flex;
+  &__main-path , &__current-path {
+    color: #0d2e69;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  &__current-path {
+    color: #898da6;
+    & i {
+      margin: 0 10px;
+    }
+  }
+}

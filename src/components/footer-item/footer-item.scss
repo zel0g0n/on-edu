@@ -1,0 +1,19 @@
+.footer__item-list {
+  &--title {
+    color: #0d2e69;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  & ul {
+    .child__item {
+      max-width: 230px;
+      margin-bottom: 16px;
+      &-text {
+        color: #898da6;
+        font-weight: 400;
+        font-size: 16px;
+      }
+    }
+  }
+}
