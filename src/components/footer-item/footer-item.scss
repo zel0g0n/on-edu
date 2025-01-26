@@ -17,3 +17,13 @@
     }
   }
 }
+
+@media only screen and (max-width: 767px) and (min-width:300px) {
+  .footer__item-list {
+    & ul {
+      .child__item {
+        max-width: 290px;
+      }
+    }
+  }
+}

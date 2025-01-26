@@ -19,6 +19,6 @@ const StarRating = ({rating}) => {
   );
 };
 StarRating.propTypes = {
-  rating: PropTypes.object
+  rating: PropTypes.string
 }
 export default StarRating;

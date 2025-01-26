@@ -52,7 +52,7 @@
           margin-bottom: 16px;
         }
         & input {
-          width: 180px;
+          width: 100%;
           height: 40px;
           color: #0d2e69;
           font-size: .8rem;
@@ -70,5 +70,34 @@
       line-height: 18px;
     }
 
+  }
+}
+@media only screen and (max-width: 999px) and (min-width:768px) {
+  .filter {
+    .filter__form {
+      display: grid;
+      grid-template-columns: 320px 320px;
+      gap: 15px !important;
+      .filter__lang , .filter__btn , .category__type , .duration__item {
+        width: 320px !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) and (min-width:300px) {
+  .filter {
+    padding: 0;
+    .filter__form {
+      padding: 20px 10px !important;
+      display: grid;
+      grid-template-columns: clamp(290px,calc(100% - 10px),500px) !important;
+      justify-content: center;
+      width: 100%;
+      gap: 15px 0 !important;
+      .filter__lang , .filter__btn , .category__type , .duration__item {
+        width: 100%;
+      }
+    }
   }
 }

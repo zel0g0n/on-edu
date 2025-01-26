@@ -13,7 +13,18 @@ const Category = ({pagLinks,data,pageHandler,pageNum,filterHandler,filteredData}
       <h2 className="title">Kurs kategoriyalari</h2>
       <Filter data={data} filteredData={filteredData} filterHandler={filterHandler} ></Filter>
       <CategoryList manualList={manualList}/>
-      <Pagination filteredData={filteredData} pageHandler={pageHandler} pageNum={pageNum} pagLinks={pagLinks} manualList={manualList} />
+      {
+        filteredData.length ? (
+          <Pagination filteredData={filteredData} pageHandler={pageHandler} pageNum={pageNum} pagLinks={pagLinks} manualList={manualList} />
+        ): (
+          <div className='empty'>
+            <img src="/empty.png" alt="" className="empty__img" />
+            <p className="empty__info">Siz qidirayotgan kurs mavjud emas</p>
+          </div>
+        )
+      
+
+      }
     </div>
   )
 }

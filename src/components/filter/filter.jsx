@@ -13,14 +13,14 @@ const Filter = ({filterHandler,data}) => {
         <div className="category__type">
           <label htmlFor="" className="category__type-text">Kategoriyalar</label>
           <select name="category" id="categories">
-            <option value="categories">Barcha kategoriyalar</option>
-            <option value="aniq-fanlar">Aniq fanlar</option>
-            <option value="tabiiy-fanlar">Tabiiy fanlar</option>
-            <option value="xorojiy-tillar">Xorijiy tillar</option>
-            <option value="pisa">Pisa</option>
-            <option value="ijtimoiy-fanlar">Ijtimoiy fanlar</option>
-            <option value="milliy-o'quv-dasturi">Milliy o'quv dasturi</option>
-            <option value="ta-limda-liderlik">Talimda liderlik</option>
+            <option className='cat-item' value="categories">Barcha kategoriyalar</option>
+            <option className='cat-item' value="aniq-fanlar">Aniq fanlar</option>
+            <option className='cat-item' value="tabiiy-fanlar">Tabiiy fanlar</option>
+            <option className='cat-item' value="xorojiy-tillar">Xorijiy tillar</option>
+            <option className='cat-item' value="pisa">Pisa</option>
+            <option className='cat-item' value="ijtimoiy-fanlar">Ijtimoiy fanlar</option>
+            <option className='cat-item' value="milliy-o'quv-dasturi">Milliy o'quv dasturi</option>
+            <option className='cat-item' value="ta-limda-liderlik">Talimda liderlik</option>
           </select>
         </div>
           <div className="min-duration duration__item">
@@ -40,7 +40,7 @@ const Filter = ({filterHandler,data}) => {
           </select>
         </div>
         <button className="filter__btn btn btn-primary">
-          Qidiruvni <br /> boshlash
+          Qidiruvni boshlash
         </button>
       </form>
     </div>
@@ -48,6 +48,6 @@ const Filter = ({filterHandler,data}) => {
 }
 Filter.propTypes = {
   data: PropTypes.array,
-  filterHandler: PropTypes.array,
+  filterHandler: PropTypes.func,
 }
 export default Filter

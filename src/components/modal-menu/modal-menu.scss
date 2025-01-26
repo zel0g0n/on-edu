@@ -1,0 +1,43 @@
+.modal__menu {
+  width: 100%;
+  height: 100vh;
+  background-color: #00011170;
+  position: fixed;
+  left: -100%;
+  top:0;
+  z-index: 9999;
+  transition: .4s;
+
+  &-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    transition: .4s;
+    width: clamp(250px,calc(100% - 10px),55%);
+    height: 100vh;
+    padding: 20px;
+    background-color: #fff;
+    .language__choose-btns {
+      display: flex; 
+      gap: 10px;
+    }
+    .modal__category {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      height: 70%;
+      &-item {
+        color: grey;
+        cursor: pointer;
+        &:hover {
+          color: #20c997;
+        }
+      }
+    }
+  }
+}
+.visible {
+  left: 0;
+}

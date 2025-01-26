@@ -14,9 +14,9 @@ const CategoryListItem = ({manualData}) => {
         <p className="type-properties">
           {typeCategory.length>1?typeCategory[1].value:typeCategory[0].value}
         </p>
-        <StarRating rating={manualData.rating} ></StarRating>
+        <StarRating rating={manualData.rating ? manualData.rating : ''} ></StarRating>
       </div>
-      <img src={initialURL + manualData.image} alt="" className="category__list-item--img" />
+      <img src={initialURL + manualData.image} alt="img" className="category__list-item--img" />
       <div className="list__item-data">
         <p className="category__list-item--name">
           {manualData.name}

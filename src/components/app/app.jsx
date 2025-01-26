@@ -3,6 +3,8 @@ import Header from '../header/header'
 import NavigationPath from '../navigation-path/navigation-path'
 import Footer from '../footer/footer'
 import Patent from '../modal/patent'
+import ModalMenu from '../modal-menu/modal-menu'
+import Login from '../login/login'
 import './app.scss'
 import Category from '../category/category'
 import { useEffect, useState } from 'react'
@@ -13,17 +15,36 @@ import { service } from '../service/service'
 const App = () => {
   const [data, setData] = useState([])
   const [filteredData, setFilteredData] = useState([])
-  
+  const [logModal,setLogModal] = useState(false)
   const [pagLinks,setPagLinks] = useState([])
   const [openModal,setOpenModal] = useState(false)
   const [pageNum,setPageNum] = useState(1)
   const {getCatogoryList, getAllData} = service()
+  const [modalMenu,setModalMenu] = useState(false)
+
+  const liveModal = () => {
+    setModalMenu(prev => !prev)
+  }
+
+  const logModHandler = () => {
+    setLogModal(prev => !prev)
+  }
 
   const changeModal = () => {
     setOpenModal(prev => !prev)
-    console.log(openModal)
   }
 
+  const setFilterModal = (category,index) => {
+
+    const options = document.querySelectorAll('.cat-item')
+    options.forEach((item,ind) => {
+      if(ind == (index + 1)) {
+        item.setAttribute('selected',true)
+      }
+    })
+    let result = filterCategory(category,data)
+    setFilteredData(result)
+  }
 
   const pageHandler = (pn) => {
     setPageNum(pn)
@@ -36,6 +57,10 @@ const App = () => {
       
       return (dataList.filter(item => item.category.slug == key))
     }
+  }
+  const searchCourse = (key) => {
+    const newData = data.filter(item => item.name.includes(key))
+    setFilteredData(newData)
   }
 
   const filterDuration = (min,max,dataList) => {
@@ -64,7 +89,6 @@ const App = () => {
     let result = filterCategory(updatedFilters.category, allData);
     result = filterDuration(updatedFilters['min-duration'], updatedFilters['max-duration'], result);
     result = filterLanguage(updatedFilters.language, result);
-    console.log(result)
     setFilteredData(result)
     return result
   }
@@ -93,9 +117,11 @@ const App = () => {
   },[pagLinks])
 
   return (
-    <div style={{overflow: `${openModal ? 'hidden' : ''}`}} className="app">
-      <Header/>
+    <div className="app">
+      <Header searchCourse={searchCourse} logModHandler={logModHandler}   liveModal={liveModal} />
+      <Login logModal={logModal} logModHandler={logModHandler}></Login>
       <NavigationPath/>
+      <ModalMenu setFilterModal={setFilterModal} modalMenu={modalMenu} liveModal={liveModal} ></ModalMenu>
       <Routes>
         <Route path='/'  element={<Category filterHandler={filterHandler} pageNum={pageNum} pagLinks={pagLinks} pageHandler={pageHandler} data={data} filteredData={filteredData}/>} />
       </Routes>
