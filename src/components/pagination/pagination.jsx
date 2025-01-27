@@ -4,15 +4,12 @@ import './pagination.scss'
 
 
 
-const Pagination = ({pagLinks, data, pageHandler, pageNum}) => {
+const Pagination = ({pagLinks, pageHandler, pageNum}) => {
   const [pagCounter,setPagCounter] = useState([])
 
 
   useEffect(() => {
-
     setPagCounter(pagLinks.slice(1,pagLinks.length-1))
-    console.log(pagLinks)
-
   },[pagLinks])
   const prevHandler = () => {
     if(pageNum > 1) {
