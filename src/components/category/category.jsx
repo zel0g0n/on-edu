@@ -16,14 +16,10 @@ const Category = ({pagLinks,data,pageHandler,pageNum,filterHandler}) => {
         data.length ? (
           <Pagination data={data} pageHandler={pageHandler} pageNum={pageNum} pagLinks={pagLinks} />
         ): (
-          setTimeout(() => {
-            return (
               <div className='empty'>
                 <img src="/empty.png" alt="" className="empty__img" />
                 <p className="empty__info">Siz qidirayotgan kurs mavjud emas</p>
               </div>
-            )
-          }, 1000)
         )
       
 
