@@ -76,6 +76,7 @@ const App = () => {
       then(res => {
         setData(res.data)
         setPagLinks(res.links)
+        setPageNum(1)
       })
 
   }
