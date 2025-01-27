@@ -4,33 +4,31 @@ import './pagination.scss'
 
 
 
-const Pagination = ({pagLinks, pageHandler, filteredData, pageNum}) => {
-  const [pageCount,setPageCount] = useState(1)
+const Pagination = ({pagLinks, data, pageHandler, pageNum}) => {
   const [pagCounter,setPagCounter] = useState([])
 
+  const [activNum,setActivNum] = useState(1)
   useEffect(() => {
-    const pl = filteredData.length
-    if(pl%6 == 0) {
-      setPageCount(pl/6)
-    }else {
-      setPageCount(Math.ceil(pl/6))
-    }
-    
-  },[filteredData])
-  useEffect(() => {
-    setPagCounter(pagLinks.slice(1,pageCount+1))
 
-  },[pageCount])
+    setPagCounter(pagLinks.slice(1,pagLinks.length-1))
+
+  },[pagLinks])
   const prevHandler = () => {
     if(pageNum > 1) {
       pageHandler(pageNum-1)
+      setActivNum(pageNum - 1)
     }
   }
 
+  const currentHandler = (numPage) => {
+    pageHandler(numPage)
+    setActivNum(numPage)
+  }
   const nextHandler = () => {
 
     if(pageNum < pagCounter.length) {
       pageHandler(pageNum+1)
+      setActivNum(pageNum + 1)
     }
   }
   
@@ -43,7 +41,7 @@ const Pagination = ({pagLinks, pageHandler, filteredData, pageNum}) => {
         <img src="https://onlinedu.uz/images/icons/custom-select-arrow.svg" alt="" />
       </button>
       {pagCounter.map((item,index)=>(
-        <button onClick={()=>pageHandler(index+1)} className={`pagination__btn ${pageNum==(index+1)?'active-pag':''}`} key={index}>
+        <button onClick={()=>currentHandler(index+1)} className={`pagination__btn ${activNum==(index+1)?'active-pag':''}`} key={index}>
           {Number(item.label)&&item.label}
         </button>
       ))}
@@ -55,7 +53,7 @@ const Pagination = ({pagLinks, pageHandler, filteredData, pageNum}) => {
 }
 Pagination.propTypes = {
   pagLinks: PropTypes.array,
-  filteredData: PropTypes.array,
+  data: PropTypes.array,
   manualList: PropTypes.array,
   pageHandler: PropTypes.func,
   pageNum: PropTypes.number,

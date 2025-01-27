@@ -5,22 +5,25 @@ import Filter from '../filter/filter'
 import CategoryList from '../category-list/category-list'
 import './category.scss'
 
-const Category = ({pagLinks,data,pageHandler,pageNum,filterHandler,filteredData}) => {
-  const manualList = filteredData.slice(-6+pageNum*6,pageNum*6)
+const Category = ({pagLinks,data,pageHandler,pageNum,filterHandler}) => {
 
   return (
     <div className='category'>
       <h2 className="title">Kurs kategoriyalari</h2>
-      <Filter data={data} filteredData={filteredData} filterHandler={filterHandler} ></Filter>
-      <CategoryList manualList={manualList}/>
+      <Filter data={data} filterHandler={filterHandler} ></Filter>
+      <CategoryList data={data}/>
       {
-        filteredData.length ? (
-          <Pagination filteredData={filteredData} pageHandler={pageHandler} pageNum={pageNum} pagLinks={pagLinks} manualList={manualList} />
+        data.length ? (
+          <Pagination data={data} pageHandler={pageHandler} pageNum={pageNum} pagLinks={pagLinks} />
         ): (
-          <div className='empty'>
-            <img src="/empty.png" alt="" className="empty__img" />
-            <p className="empty__info">Siz qidirayotgan kurs mavjud emas</p>
-          </div>
+          setTimeout(() => {
+            return (
+              <div className='empty'>
+                <img src="/empty.png" alt="" className="empty__img" />
+                <p className="empty__info">Siz qidirayotgan kurs mavjud emas</p>
+              </div>
+            )
+          }, 1000)
         )
       
 

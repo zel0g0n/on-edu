@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import CategoryListItem from '../category-list-item/category-list-item'
 import './category-list.scss'
 
-const CategoryList = ({manualList}) => {
+const CategoryList = ({data}) => {
   return (
     <div className='category__list'>
-      {manualList.map((item) => (
+      {data.map((item) => (
         <CategoryListItem key={item.id} manualData={item}/>
       ))}
         
@@ -15,6 +15,6 @@ const CategoryList = ({manualList}) => {
   )
 }
 CategoryList.propTypes = {
-  manualList: PropTypes.array,
+  data: PropTypes.array,
 }
 export default CategoryList

@@ -14,12 +14,12 @@ import { service } from '../service/service'
 
 const App = () => {
   const [data, setData] = useState([])
-  const [filteredData, setFilteredData] = useState([])
+  const [pageOrder,setPageOrder] = useState(1)
   const [logModal,setLogModal] = useState(false)
   const [pagLinks,setPagLinks] = useState([])
   const [openModal,setOpenModal] = useState(false)
   const [pageNum,setPageNum] = useState(1)
-  const {getCatogoryList, getAllData} = service()
+  const {getAllData, filterAllData, searchAllData} = service()
   const [modalMenu,setModalMenu] = useState(false)
 
   const liveModal = () => {
@@ -38,64 +38,53 @@ const App = () => {
 
     const options = document.querySelectorAll('.cat-item')
     options.forEach((item,ind) => {
-      if(ind == (index + 1)) {
+      if(ind == (index)) {
         item.setAttribute('selected',true)
       }
     })
-    let result = filterCategory(category,data)
-    setFilteredData(result)
+    filterAllData(category).then(res => {
+      setData(res.data)
+      setPagLinks(res.links)
+    })
   }
 
   const pageHandler = (pn) => {
     setPageNum(pn)
+    getAllData(pn).then(res => {
+      setData(res.data)
+      setPagLinks(res.links)
+    })
   }
 
-  const filterCategory = (key, dataList) => {
-    if(key == 'categories') {
-      return dataList
-    } else {
-      
-      return (dataList.filter(item => item.category.slug == key))
-    }
-  }
   const searchCourse = (key) => {
-    const newData = data.filter(item => item.name.includes(key))
-    setFilteredData(newData)
-  }
-
-  const filterDuration = (min,max,dataList) => {
-    if(min == '' && max == '') {
-      return dataList
-    } else {
-      return dataList.filter(item => (item.hours > min && item.hours < max))
-    }
+    searchAllData(key).then(res => {
+      setData(res.data)
+      setPagLinks(res.links)
+    })
   }
 
 
-  const filterLanguage = (lang,dataList) => {
-    if(lang == 'languages') {
-      return dataList
-    } else {
-      return dataList.filter(item => item.language.name == lang)
-    }
-  }
 
-  const filterHandler = (selector,allData) => {
+  const filterHandler = (selector) => {
     const formData = new FormData(selector)
     const updatedFilters = {}
     formData.forEach((value,key) => {
       updatedFilters[key] = value
     })
-    let result = filterCategory(updatedFilters.category, allData);
-    result = filterDuration(updatedFilters['min-duration'], updatedFilters['max-duration'], result);
-    result = filterLanguage(updatedFilters.language, result);
-    setFilteredData(result)
-    return result
+    const {category,min,max,language} = updatedFilters
+    filterAllData(category,min,max,language).
+      then(res => {
+        setData(res.data)
+        setPagLinks(res.links)
+      })
+
   }
   useEffect( ()=>{
-    getCatogoryList(`https://api.onlinedu.uz/api/v1/courses-home?per_page=6&type=demo&page=1&`)
+    getAllData(pageOrder)
     .then(response => {
+      setData(response.data)
       setPagLinks(response.links)
+
     })
     
     
@@ -107,14 +96,6 @@ const App = () => {
     }
   },[])
   
-  useEffect(() => {
-    getAllData(pagLinks.slice(1,pagLinks.length-1))
-    .then(res => {
-      setData(res)
-      setFilteredData(res)
-
-    })
-  },[pagLinks])
 
   return (
     <div className="app">
@@ -123,7 +104,7 @@ const App = () => {
       <NavigationPath/>
       <ModalMenu setFilterModal={setFilterModal} modalMenu={modalMenu} liveModal={liveModal} ></ModalMenu>
       <Routes>
-        <Route path='/'  element={<Category filterHandler={filterHandler} pageNum={pageNum} pagLinks={pagLinks} pageHandler={pageHandler} data={data} filteredData={filteredData}/>} />
+        <Route path='/'  element={<Category filterHandler={filterHandler} pageNum={pageNum} pagLinks={pagLinks} pageHandler={pageHandler} data={data}/>} />
       </Routes>
       <Patent changeModal={changeModal} openModal={openModal}/>
       <Footer changeModal={changeModal} />

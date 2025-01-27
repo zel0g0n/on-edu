@@ -13,30 +13,30 @@ const Filter = ({filterHandler,data}) => {
         <div className="category__type">
           <label htmlFor="" className="category__type-text">Kategoriyalar</label>
           <select name="category" id="categories">
-            <option className='cat-item' value="categories">Barcha kategoriyalar</option>
-            <option className='cat-item' value="aniq-fanlar">Aniq fanlar</option>
-            <option className='cat-item' value="tabiiy-fanlar">Tabiiy fanlar</option>
-            <option className='cat-item' value="xorojiy-tillar">Xorijiy tillar</option>
-            <option className='cat-item' value="pisa">Pisa</option>
-            <option className='cat-item' value="ijtimoiy-fanlar">Ijtimoiy fanlar</option>
-            <option className='cat-item' value="milliy-o'quv-dasturi">Milliy o'quv dasturi</option>
-            <option className='cat-item' value="ta-limda-liderlik">Talimda liderlik</option>
+            <option className='cat-item' value="">Barcha kategoriyalar</option>
+            <option className='cat-item' value={25}>Aniq fanlar</option>
+            <option className='cat-item' value={26}>Tabiiy fanlar</option>
+            <option className='cat-item' value={27}>Xorijiy tillar</option>
+            <option className='cat-item' value={51}>Pisa</option>
+            <option className='cat-item' value={71}>Ijtimoiy fanlar</option>
+            <option className='cat-item' value={87}>Milliy o'quv dasturi</option>
+            <option className='cat-item' value={118}>Talimda liderlik</option>
           </select>
         </div>
           <div className="min-duration duration__item">
             <label htmlFor="">Minimal davomiyligi</label>
-            <input name='min-duration' placeholder='Min. davomiyligi' type="number" />
+            <input name='min' placeholder='Min. davomiyligi' type="number" />
           </div>
           <div className="max-duration duration__item">
             <label htmlFor="">Maximal davomiyligi</label>
-            <input name='max-duration' placeholder='Max. davomiyligi' type="number" />
+            <input name='max' placeholder='Max. davomiyligi' type="number" />
           </div>
         <div className="filter__lang">
           <label htmlFor="" className="category__type-text">Kategoriyalar</label>
           <select name="language" id="languages">
-            <option value="languages">Barcha tillar</option>
-            <option value="O'zbek">O'zbekcha</option>
-            <option value="Русский">Ruscha</option>
+            <option value="">Barcha tillar</option>
+            <option value={1}>O'zbekcha</option>
+            <option value={2}>Ruscha</option>
           </select>
         </div>
         <button className="filter__btn btn btn-primary">
